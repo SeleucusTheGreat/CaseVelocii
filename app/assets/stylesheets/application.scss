@@ -1,8 +1,17 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "_colors";
 
+.header-navbar{
+    height: 100px;
+    background-color: white;
+    border: 1px solid #d7dce2; /* Dark border */
+    align-content: center;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
 
-
-.h1-header {
-    color: blue;
-}
+  .logo-link{
+    display:block;
+    color: $airbnb-color;
+  }
