@@ -1,10 +1,22 @@
 
-<div class="collapse navbar-collapse justify-content-end" id="navbarNavRight">
-      <div class="btn-group">
-        <button type="button" class="btn btn-danger">User</button>
-        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-          <span class="visually-hidden">Toggle Dropdown</span>
-        </button>
+<div class="collapse navbar-collapse justify-content-end " id="navbarNavRight">
+      <div class="btn-group dropleft ">
+        <div  class="btn-bell  dropdown-toggle-split dropleft" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= render "layouts/bell" %>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                9+
+          </span>
+        </div>
+        
+        <ul class="dropdown-menu dropleft">
+          <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
+      </div>
+      <div class="btn-group px-2 ">
+        <div  class="btn-bell  dropdown-toggle-split " data-bs-toggle="dropdown" aria-expanded="false">
+            <%=render "layouts/person_icon"%>
+        </div>
+        <h1 class="h5 mb-3 font-weight-normal">Frank</h1>
         <ul class="dropdown-menu">
           <li><%=link_to "Log In" , new_user_session_path , class:"dropdown-item"%></li>
           <li><%=link_to "Sign up" , new_user_registration_path , class:"dropdown-item"%></li>
@@ -12,4 +24,6 @@
           <li><a class="dropdown-item" href="#">Separated link</a></li>
         </ul>
       </div> 
+
+     
 </div>
