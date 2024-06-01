@@ -24,4 +24,23 @@
     color: grey;
   }
 
- 
+ .hidden {
+  display:none
+ }
+
+ .card-index {
+  border: 1px solid white;
+  color: black;
+ }
+
+ .card-title{
+  color: blue
+ }
+
+
+ .card-img-top{
+  width: 100%;
+  height: 200px; /* Adjust the height as needed */
+  object-fit: cover; /* Ensures the image covers the entire area without stretching */
+}
+
