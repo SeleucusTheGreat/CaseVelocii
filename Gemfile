@@ -16,8 +16,10 @@ gem "dartsass-sprockets"
 gem "bootstrap", "~> 5.3.3"
 gem "jquery-rails"
 gem "popper_js", "~> 2.11.8"
+gem "devise", "~> 4.9"
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 6.1.0'
   gem "debug", platforms: %i[ mri windows ]
 end
@@ -34,4 +36,3 @@ group :development do
 end
 
 
-gem "devise", "~> 4.9"
