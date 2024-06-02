@@ -28,8 +28,10 @@
           <% if current_user %>
             <li><%= button_to "Log out" , destroy_user_session_path , method: :delete ,class:"dropdown-item"%></li>
           <%else%>
-          <li><%=link_to "Log In" , new_user_session_path , class:"dropdown-item"%></li>
-          <li><%=link_to "Sign up" , new_user_registration_path , class:"dropdown-item"%></li>
+          <!--<li><%=link_to "Log In" , new_user_session_path , class:"dropdown-item"%></li>
+          <li><%=link_to "Sign up" , new_user_registration_path , class:"dropdown-item"%></li> -->
+          <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logInModal">Log in</button></li>
+          <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign up</button></li>
           <%end%>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="#">Separated link</a></li>
