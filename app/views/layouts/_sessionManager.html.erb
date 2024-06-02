@@ -16,10 +16,21 @@
         <div  class="btn-bell  dropdown-toggle-split " data-bs-toggle="dropdown" aria-expanded="false">
             <%=render "layouts/person_icon"%>
         </div>
-        <h1 class="h5 mb-3 font-weight-normal">Frank</h1>
-        <ul class="dropdown-menu">
+        <h1 class="h5 mb-3 font-weight-normal">
+              <%=if current_user  
+                  current_user.email
+                else
+                  "Users"
+                end  %>
+        
+        </h1>
+        <ul class="dropdown-menu"> 
+          <% if current_user %>
+            <li><%= button_to "Log out" , destroy_user_session_path , method: :delete ,class:"dropdown-item"%></li>
+          <%else%>
           <li><%=link_to "Log In" , new_user_session_path , class:"dropdown-item"%></li>
           <li><%=link_to "Sign up" , new_user_registration_path , class:"dropdown-item"%></li>
+          <%end%>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="#">Separated link</a></li>
         </ul>
