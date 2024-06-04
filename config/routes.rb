@@ -14,5 +14,10 @@ Rails.application.routes.draw do
   root "home#index"
   namespace :api do
     resources :users, only: :show
+    get "users_by_emails", to: "users_by_emails#show"
+  end
+
+  devise_scope :user do
+    get 'sign_in', to: 'users/log_in#login'
   end
 end

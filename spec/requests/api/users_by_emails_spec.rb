@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Users", type: :request do
+RSpec.describe "Api::UsersByEmails", type: :request do
     describe "GET show" do
 
         let (:headers) do 
@@ -10,18 +10,19 @@ RSpec.describe "Api::Users", type: :request do
         context "user exists" do
             it "is successful" do
                 user = create(:user)
-                get api_user_path(user), headers: headers
+                get api_users_by_emails_path(email: user.email), headers: headers
                 expect(response).to be_successful
+
                 
-                
+
+
             end
         end
 
         context "user does not exist" do
             it "is not found" do
-                get api_user_path(id: "junk"), headers: headers
-                expect(response.status).to eq 404
-               
+                get api_users_by_emails_path(email: "junk@junkyard.com"), headers: headers
+                expect(response.status).to eq 404     
             end
         end
 

@@ -1,6 +1,6 @@
 
 
-<nav class="navbar header-navbar navbar-expand-lg mx-auto" data-controller="header">
+<nav class="navbar header-navbar navbar-expand-lg d-flex justify-content-between" data-controller="header">
     
     <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
         <%= link_to root_path do %>
@@ -25,9 +25,13 @@
       </ul>
 
     </div>
+
     
-
-
     <%=render "layouts/sessionManager"%>
+    
+    
+    <%=render "modals/user_modal" , modal_content: "home/user_auth_form"%>
+    <%=render "modals/sign_up_modal"%>
+
 </nav>
   

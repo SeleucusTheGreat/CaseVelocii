@@ -13,11 +13,9 @@
   </head>
 
   <body>
-      <%=render "layouts/navbar"%>
-      <%=render "modals/first_modal"%>
-      <%=render "modals/log_in_modal"%>
-      <%=render "modals/sign_up_modal"%>
 
+      <%=render "layouts/navbar"%>
+      <%=render "layouts/alerts"%>
       <%= yield %>
   </body>
 </html>
