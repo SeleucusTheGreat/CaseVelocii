@@ -11,6 +11,7 @@ class Users::LogInController < Devise::SessionsController
             sign_in(user)
             redirect_to root_path, notice: 'Logged in successfully.'
           else
+            flash[:show_sign_up_modal] = true
             redirect_to root_path, alert: 'Invalid email or password.'
           end
         end
