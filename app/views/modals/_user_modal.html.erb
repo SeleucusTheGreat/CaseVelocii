@@ -1,5 +1,36 @@
 <div class="modal" tabindex="-1" id="UserModal" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered">
-      <%=render modal_content%>
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center">Log in</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: sign_in_path, method: :get  do |f|%>
+            <div class="mb-3">
+                <%=f.label "Email:", class:"form-label"%>
+                <%=f.email_field :email, class:"form-control" , placeholder: "john@email.com"%>  
+            </div>
+            <div class="mb-3">
+                <%= f.label :password %><br>
+                <%= f.password_field :password, autocomplete: "current-password" , class:"form-control" %>
+            </div>
+            <div class="d-grid gap-2">
+                <%= f.submit "Continue", class:"btn btn-danger" %>
+            </div>
+        <%end%>
+
+        <hr class="hr hr-blurry" />
+        <div class="d-grid gap-2 text-center">
+            
+
+            <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary', data: { turbo: false } do %>
+              Log in with Google <%= image_tag 'googlemini_logo.svg', class: 'bi', size: '20x20' %>
+            <% end %>
+
+        </div>
+      </div>
+    </div>
+    
   </div>
 </div>

@@ -25,11 +25,14 @@
             </div>
         </form>
         <hr class="hr hr-blurry" />
-        <div class="d-grid gap-2">
-            <button type="button" class="btn btn-outline-primary">Sign Up with Google <%= image_tag 'google_logo.svg', class: 'bi', size: '20x20' %></button>
-        </div>
-      
-      </div>     
+        <div class="d-grid gap-2 text-center">
+            
+
+            <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary',data: { turbo: false } do %>
+              Log in with Google <%= image_tag 'googlemini_logo.svg', class: 'bi', size: '20x20' %>
+            <% end %>
+
+        </div> 
     </div>
   </div>
 </div>

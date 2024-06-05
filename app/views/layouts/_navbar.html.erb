@@ -4,7 +4,7 @@
     
     <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
         <%= link_to root_path do %>
-            <%=render "layouts/swg"%>
+            <%= image_tag 'logo.png', class: 'card-img-top', style: 'width: 120px; height: 120px;' %>
         <%end%>
     </div>
    
@@ -28,8 +28,6 @@
 
     
     <%=render "layouts/sessionManager"%>
-    
-    
     <%=render "modals/user_modal" , modal_content: "home/user_auth_form"%>
     <%=render "modals/sign_up_modal"%>
 
