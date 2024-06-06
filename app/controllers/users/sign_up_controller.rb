@@ -22,16 +22,21 @@ class Users::SignUpController < Devise::RegistrationsController
         end
   
         format.json do
-          user = User.find_by(email: params[:email])
-          
-          if user && user.valid_password?(params[:password])
-            sign_in(user)
-            render json: { success: true, message: 'Logged in successfully.' }, status: :ok
+          user = User.find_by(email: sign_up_params[:email])
+          if user 
+            render json: { success: false, message: 'email already existing' }, status: :unauthorized
           else
-            render json: { success: false, message: 'Invalid email or password.' }, status: :unauthorized
+            build_resource(sign_up_params)
+            if resource.save
+                sign_up(:user, resource)
+                render json: { success: true, message: 'user registred ' }, status: :ok
+            else
+                render json: { success: false, message: "couldn't register user " }, status: :not_found
+            end
           end
         end
       end
+    
     end
 
     private 
