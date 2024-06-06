@@ -6,24 +6,27 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <%= form_with url: sign_up_path, method: :post , scope: :user   do |f|%>
+            <div class="field">
+              <%= f.label "full name" %><br />
+              <%= f.text_field :full_name, autofocus: true, autocomplete: "your full name ", class:"form-control" , placeholder: "John Smith ", minlength: 5, maxlength: 50%>
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+                <%=f.label "Email:", class:"form-label"%>
+                <%=f.email_field :email, class:"form-control" , placeholder: "john@email.com"%>  
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Renter Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+                <%= f.label :password %><br>
+                <%= f.password_field :password, autocomplete: "new-password" , class:"form-control" , minlength: 5, maxlength: 50 %>
             </div>
+             <div class="mb-3">
+                <%= f.label :password_confirmation %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "new-password" , class:"form-control"%>
+              </div>
             <div class="d-grid gap-2">
-              
-              <button type="submit" class="btn btn-danger">Sign Up</button>
+                <%= f.submit "Continue", class:"btn btn-danger" %>
             </div>
-        </form>
+        <%end%>
         <hr class="hr hr-blurry" />
         <div class="d-grid gap-2 text-center">
             

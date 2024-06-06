@@ -20,5 +20,6 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get 'sign_in', to: 'users/log_in#login'
+    post "sign_up", to: "users/sign_up#signup"
   end
 end

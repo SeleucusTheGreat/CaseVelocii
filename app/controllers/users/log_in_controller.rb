@@ -4,10 +4,10 @@ class Users::LogInController < Devise::SessionsController
     def login
       respond_to do |format|
         format.html do
-          user = User.find_by(email: params[:email])
+          user = User.find_by(email: sign_up_params[:email])
           puts "#{user.to_json}"
           
-          if user && user.valid_password?(params[:password])
+          if user && user.valid_password?(sign_up_params[:password])
             sign_in(user)
             redirect_to root_path, notice: 'Logged in successfully.'
           else
@@ -28,4 +28,10 @@ class Users::LogInController < Devise::SessionsController
         end
       end
     end
-  end
+
+    def sign_up_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
+    end
+
+
+end

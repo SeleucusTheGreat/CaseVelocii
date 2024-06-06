@@ -14,14 +14,21 @@
       </div>
       <div class="btn-group px-2 ">
         <div  class="btn-bell  dropdown-toggle-split " data-bs-toggle="dropdown" aria-expanded="false">
-            <%=render "layouts/person_icon"%>
+           <div class="profile-container">
+              <% if current_user && current_user.provider == "google_oauth2" %>
+                <%= image_tag(current_user.avatar_url, class: "profile-picture  card-img-top" , style: " width: 50px;  height: 50px; border-radius: 50%; object-fit: cover; " ) %>
+              <% else %>
+                <%= render "layouts/person_icon" %>
+              <% end %>
+            </div>
+
         </div>
         <h1 class="h5 mb-3 font-weight-normal">
               <%=if current_user  
-                  current_user.email
-                else
+                  current_user.full_name
+                  else
                   "Users"
-                end  %>
+                  end %>
         
         </h1>
         <ul class="dropdown-menu"> 

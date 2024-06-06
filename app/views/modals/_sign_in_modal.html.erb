@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: sign_in_path, method: :get  do |f|%>
+        <%= form_with url: sign_in_path, method: :get , scope: :user do |f|%>
             <div class="mb-3">
                 <%=f.label "Email:", class:"form-label"%>
                 <%=f.email_field :email, class:"form-control" , placeholder: "john@email.com"%>  
