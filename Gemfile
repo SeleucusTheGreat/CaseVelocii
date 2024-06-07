@@ -17,6 +17,10 @@ gem "bootstrap", "~> 5.3.3"
 gem "jquery-rails"
 gem "popper_js", "~> 2.11.8"
 gem "devise", "~> 4.9"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
+
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -36,8 +40,5 @@ group :development do
 end
 
 
-gem "omniauth"
-gem "omniauth-google-oauth2"
-gem "omniauth-rails_csrf_protection"
 
 

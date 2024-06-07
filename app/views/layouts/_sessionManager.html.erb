@@ -16,7 +16,7 @@
         <div  class="btn-bell  dropdown-toggle-split " data-bs-toggle="dropdown" aria-expanded="false">
            <div class="profile-container">
               <% if current_user && current_user.provider == "google_oauth2" %>
-                <%= image_tag(current_user.avatar_url, class: "profile-picture  card-img-top" , style: " width: 50px;  height: 50px; border-radius: 50%; object-fit: cover; " ) %>
+                <%= image_tag(current_user.avatar_url, class: "profile-picture  card-img-top" , style: " width: 40px;  height: 40px; border-radius: 50%; object-fit: cover; " ) %>
               <% else %>
                 <%= render "layouts/person_icon" %>
               <% end %>
@@ -33,6 +33,7 @@
         </h1>
         <ul class="dropdown-menu"> 
           <% if current_user %>
+            <li><%=link_to "Homepage" , homepage_path , class:"dropdown-item"%></li>
             <li><%= button_to "Log out" , destroy_user_session_path , method: :delete ,class:"dropdown-item"%></li>
           <%else%>
           <!--<li><%=link_to "Log In" , new_user_session_path , class:"dropdown-item"%></li>

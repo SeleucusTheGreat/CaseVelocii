@@ -1,0 +1,50 @@
+<div class="container mt-5">
+    <div class="card" data-controller="form-validation">
+      <div class="card-body">
+        <h3 class="card-title text-center">User Profile</h3>
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <%= form_with url: update_path, method: :get , scope: :user   do |f|%>
+            <% if @user.avatar.attached?  %>
+              <%= image_tag @user.avatar, class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
+            <%else%>
+              <%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
+            <% end %>
+            <div class="field ">
+                    <%= f.file_field :avatar , class:"form-control"%>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <table class="table table-borderless mt-3">
+              <tbody>
+                  <div class="field">
+                    <%= f.label "full name" %><br />
+                    <%= f.text_field :full_name, autofocus: true, autocomplete: "your full name ", class:"form-control" , placeholder: "John Smith ",  minlength: 5, maxlength: 50 ,data: { target: "form-validation.name" } ,required: true %>
+                    <div data-target="form-validation.nameError" class="text-danger"></div>
+                  </div>
+                  <div class="mb-3">
+                      <%=f.label "Email:", class:"form-label"%>
+                      <%=f.email_field :email, class:"form-control" , placeholder: "john@email.com", data: { target: "form-validation.email" } ,required: true%>  
+                      <div data-target="form-validation.emailError" class="text-danger"></div>
+                  </div>
+                  <div class="mb-3">
+                      <%= f.label :password %><br>
+                      <%= f.password_field :password, autocomplete: "new-password" , class:"form-control" , minlength: 5, maxlength: 50  , data: { target: "form-validation.password" },required: true%>
+                      <div data-target="form-validation.passwordError" class="text-danger"></div>
+                  </div>
+                  <div class="mb-3">
+                      <%= f.label :password_confirmation %><br />
+                      <%= f.password_field :password_confirmation, autocomplete: "new-password" , class:"form-control", data: { target: "form-validation.passwordConfirmation" } , required: true%>
+                      <div data-target="form-validation.passwordConfirmationError" class="text-danger"></div>
+                  </div>
+                  <div class="d-grid gap-2">
+                      <%= f.submit "Save Changes", class:"btn btn-danger" , data: { target: "form-validation.submitButton" }%>
+                  </div>
+                <%end%>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

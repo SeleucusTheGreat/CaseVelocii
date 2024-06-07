@@ -19,10 +19,14 @@
                 <%= f.label :password %><br>
                 <%= f.password_field :password, autocomplete: "new-password" , class:"form-control" , minlength: 5, maxlength: 50 %>
             </div>
-             <div class="mb-3">
+            <div class="mb-3">
                 <%= f.label :password_confirmation %><br />
                 <%= f.password_field :password_confirmation, autocomplete: "new-password" , class:"form-control"%>
-              </div>
+            </div>
+            <div class="field">
+              <%= f.label :avatar %><br />
+              <%= f.file_field :avatar %>
+            </div>
             <div class="d-grid gap-2">
                 <%= f.submit "Continue", class:"btn btn-danger" %>
             </div>
