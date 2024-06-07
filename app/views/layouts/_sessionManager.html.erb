@@ -18,7 +18,12 @@
               <% if current_user && current_user.provider == "google_oauth2" %>
                 <%= image_tag(current_user.avatar_url, class: "profile-picture  card-img-top" , style: " width: 40px;  height: 40px; border-radius: 50%; object-fit: cover; " ) %>
               <% else %>
-                <%= render "layouts/person_icon" %>
+                
+                <% if current_user && current_user.avatar.attached?  %>
+                  <%= image_tag current_user.avatar, class: 'profile-avatar' , style: " width: 40px;  height: 40px; border-radius: 50%; object-fit: cover; " %>
+                <%else%>
+                  <%= render "layouts/person_icon" %>
+                <%end%>
               <% end %>
             </div>
 
@@ -34,6 +39,7 @@
         <ul class="dropdown-menu"> 
           <% if current_user %>
             <li><%=link_to "Homepage" , homepage_path , class:"dropdown-item"%></li>
+             <li><hr class="dropdown-divider"></li>
             <li><%= button_to "Log out" , destroy_user_session_path , method: :delete ,class:"dropdown-item"%></li>
           <%else%>
           <!--<li><%=link_to "Log In" , new_user_session_path , class:"dropdown-item"%></li>
@@ -41,8 +47,7 @@
           <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#UserModal">Log in</button></li>
           <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign up</button></li>
           <%end%>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Separated link</a></li>
+  
         </ul>
       </div> 
 

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :user do
-    get "update", to: "users/edit_user#update"
+    patch "update", to: "users/edit_user#update"
     get "sign_in", to: "users/log_in#login"
     post "sign_up", to: "users/sign_up#signup"
   end
