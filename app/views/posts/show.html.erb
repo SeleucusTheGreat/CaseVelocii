@@ -1,10 +1,67 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @post %>
-
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">Title</h3>
+      <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+          <% if @post.photos.attached? %>
+            <%= render "posts/caruousel"%>
+          <% else %>
+            <%= render "posts/carousel"%>
+            <!--<%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 500px; height: 500px; border-radius: 50%; object-fit: cover;" %>-->
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">Property Details</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Address: </strong><%= @post.address%> </p>
+          <p><strong>number of Romms: </strong> <%= @post.numer_rooms%></p>
+          <p><strong>Square feet: </strong> <%= @post.square_feet%></p>
+          <p><strong>Floor Number: </strong><%= @post.floor%> </p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Price:</strong><%= @post.price%></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">User Profile</h3>
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <h5 class="">Profile picture:</h5>
+            <% if @user.avatar.attached?  %>
+              <%= image_tag @user.avatar, class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
+            <%else%>
+              <%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
+            <% end %>
+            
+          </div>
+          <div class="col-md-8">
+            <table class="table table-borderless mt-6">
+              <tbody>
+               
+                <tr>
+                  <th scope="row">Full Name:</th>
+                  <td><%= @user.full_name %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Email:</th>
+                  <td><%= @user.email %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center">
+            <%= link_to 'Edit Profile', homepage_edit_path, class: 'btn btn-primary  ' %>
+          </div>
+        </div>
+    </div>
+  </div>
 </div>

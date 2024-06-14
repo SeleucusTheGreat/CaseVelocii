@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   authenticated :user do
     get 'homepage', to: "homepage#show"
     get  "homepage_edit", to: "homepage#edit_user"
+    get "mycards", to: "posts#mycards"
   end
   get 'home/index'
   root "home#index"

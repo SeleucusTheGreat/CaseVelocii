@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h1 class="text-center">My Houses</h1>
+  <% @posts.each do |post| %>
+    <div class="card mb-3">
+      <div class="card-body text-center">
+        <h3 class="card-title"><%= post.title %></h3>
+
+        <% if post.photos.attached? %>
+          <div class="row justify-content-center mb-3">
+            <% post.photos.each do |photo| %>
+              <div class="col-md-3">
+                <%= image_tag photo, class: "img-fluid" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <p class="card-text"><strong>Description:</strong> <%= post.description %></p>
+        <p class="card-text"><strong>Address:</strong> <%= post.address %></p>
+        <p class="card-text"><strong>Price:</strong> <%= number_to_currency(post.price) %></p>
+        <p class="card-text"><strong>Number of Rooms:</strong> <%= post.numer_rooms %></p>
+        <p class="card-text"><strong>Square Feet:</strong> <%= post.square_feet %></p>
+        <p class="card-text"><strong>Floor:</strong> <%= post.floor %></p>
+
+        <div class="text-center mt-3">
+          <%= link_to 'Edit', edit_post_path(post), class: "btn btn-primary" %>
+          <%= link_to 'Show', post_path(post), class: "btn btn-secondary" %>
+          <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
