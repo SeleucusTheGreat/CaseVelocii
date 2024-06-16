@@ -3,82 +3,48 @@
     <div data-controller="modal" ></div>
 <% end %>
 
+  <div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% @posts.each do |post| %>
+      <div class="col">
+        <div class="shadow-sm p-3 mb-5 bg-light rounded card h-100 custom-card" data-controller="cards" data-cards-target="card" data-action="click->cards#explore" data-url="<%= post_path(post) %>">
+          <% if post.photos.attached? %>
+            <div class="row justify-content-center mb-3">
+              <% post.photos.each do |photo| %>
+                <div class="col-12">
+                  <%= image_tag photo, class: "img-fluid" , style:"" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+          <div class="card-body bg-light">
+            <p class="card-text"><strong>Address:</strong> <%= post.address %></p>
+            <p class="card-text"><strong>Price:</strong> <%= number_to_currency(post.price) %></p>
+            <p class="card-text"><strong>Square Feet:</strong> <%= post.square_feet %></p>
+            <p class="card-text"><strong>City:</strong> <%= post.city %></p>
+            
+          </div>
+          <div class="card-footer bg-light">
+            <p class="card-text text-center"><strong>Made By:</strong></p>
+            <div class="row">
+              <div class="col-md-4 text-center">
+                <% if post.user.avatar.attached? %>
+                  <%= image_tag post.user.avatar, class: 'profile-avatar', style: "width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" %>
+                <% else %>
+                  <%= image_tag "logo.png", class: 'profile-avatar', style: "width: 70px; height: 70px; border-radius: 50%; object-fit: cover;" %>
+                <% end %>
+              </div>
+              <div class="col-md-8">
+                <p class="card-text"><strong>Name:</strong> <%= post.user.full_name %></p>
+                <p class="card-text"><strong>Email:</strong> <%= post.user.email %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
 
-<div class="container mt-5">
-    <div class="row row-cols-1 row-cols-md-3 g-4 ">
-        <div class="col-auto">
-            <div class="shadow-sm p-3 mb-5 bg-white rounded"  data-controller="card" data-card-target="card" >
-                <div class="card-index card-01 card h-100">
-                    <%= image_tag 'appartment1.png', class: 'card-img-top', size: '200x200' %>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="shadow-sm p-3 mb-5 bg-white rounded"  data-controller="card" data-card-target="card" >
-                <div class="card-index card h-100">
-                    <%= image_tag 'appartment2.png', class: 'card-img-top', size: '200x200' %>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-           <div class="shadow-sm p-3 mb-5 bg-white rounded"  data-controller="card" data-card-target="card" >
-                <div class="card-index card h-100">
-                    <%= image_tag 'appartment3.png', class: 'card-img-top', size: '200x200' %>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
-        <div class="col">
-            <div class="shadow-sm p-3 mb-5 bg-white rounded"  data-controller="card" data-card-target="card" id="1" >
-                <div class="card-index card h-100">
-                    <%= image_tag 'appartment1.png', class: 'card-img-top', size: '200x200' %>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="shadow-sm p-3 mb-5 bg-white rounded"  data-controller="card" data-card-target="card" >
-                <div class="card-index card h-100">
-                    <%= image_tag 'appartment2.png', class: 'card-img-top', size: '200x200' %>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="shadow-sm p-3 mb-5 bg-white rounded"  data-controller="card" data-card-target="card" >
-                <div class="card-index card h-100">
-                    <%= image_tag 'appartment3.png', class: 'card-img-top', size: '200x200' %>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+

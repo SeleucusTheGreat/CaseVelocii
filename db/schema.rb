@@ -42,7 +42,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_200307) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.text "address"
+    t.string "city", null: false
+    t.string "address"
     t.float "price"
     t.integer "numer_rooms"
     t.float "square_feet"

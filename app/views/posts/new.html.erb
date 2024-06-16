@@ -19,7 +19,11 @@
             </div>
             <div class="mb-3">
               <%= form.label :address, style: "display: block" %>
-              <%= form.text_area :address, class: "form-control" %>
+              <%= form.text_field :address, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :city %>
+              <%= form.select :city, options_for_select(['Rome', 'Milan', 'Pisa']),class: "form-select" %>
             </div>
             <div class="mb-3">
               <%= form.label :price, style: "display: block" %>

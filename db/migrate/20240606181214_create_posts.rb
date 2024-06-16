@@ -3,7 +3,8 @@ class CreatePosts < ActiveRecord::Migration[7.1]
     create_table :posts do |t|
       t.string :title
       t.text :description
-      t.text :address
+      t.string :city , null:false
+      t.string :address
       t.float :price
       t.integer :numer_rooms
       t.float :square_feet
