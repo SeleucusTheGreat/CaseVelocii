@@ -23,8 +23,11 @@ gem "omniauth-rails_csrf_protection"
 
 
 group :development, :test do
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 6.1.0'
+  gem 'capybara'
   gem "debug", platforms: %i[ mri windows ]
 end
 
