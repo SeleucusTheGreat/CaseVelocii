@@ -17,10 +17,17 @@ gem "bootstrap", "~> 5.3.3"
 gem "jquery-rails"
 gem "popper_js", "~> 2.11.8"
 gem "devise", "~> 4.9"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
+
 
 group :development, :test do
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 6.1.0'
+  gem 'capybara'
   gem "debug", platforms: %i[ mri windows ]
 end
 
@@ -36,8 +43,5 @@ group :development do
 end
 
 
-gem "omniauth"
-gem "omniauth-google-oauth2"
-gem "omniauth-rails_csrf_protection"
 
 

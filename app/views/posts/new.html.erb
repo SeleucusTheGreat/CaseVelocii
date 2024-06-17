@@ -1,0 +1,53 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">Make your House Card</h3>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <%= form_with(model: @post) do |form| %>
+            <div class="mb-3">
+              <%= form.label :title, style: "display: block" %>
+              <%= form.text_field :title, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :photos, style: "display: block" %>
+              <%= form.file_field :photos, multiple: true, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :description, style: "display: block" %>
+              <%= form.text_area :description, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :address, style: "display: block" %>
+              <%= form.text_field :address, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :city %>
+              <%= form.select :city, options_for_select(['Rome', 'Milan', 'Pisa']),class: "form-select" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :price, style: "display: block" %>
+              <%= form.number_field :price, step: :any, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :numer_rooms, style: "display: block" %>
+              <%= form.number_field :numer_rooms, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :square_feet, style: "display: block" %>
+              <%= form.number_field :square_feet, step: :any, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :floor, style: "display: block" %>
+              <%= form.number_field :floor, class: "form-control" %>
+            </div>
+            
+            <div class="text-center">
+              <%= form.submit 'Submit', class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

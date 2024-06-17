@@ -58,3 +58,27 @@
   object-fit: cover; 
 }
 
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+.card-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-body.bg-light, .card-footer.bg-light {
+  background-color: #95c6f7 !important; 
+}
+
+.custom-card {
+  max-height: 400px; 
+  overflow: hidden;
+  border: none;
+}

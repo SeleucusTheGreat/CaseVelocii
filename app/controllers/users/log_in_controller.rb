@@ -4,9 +4,7 @@ class Users::LogInController < Devise::SessionsController
     def login
       respond_to do |format|
         format.html do
-          user = User.find_by(email: sign_up_params[:email])
-          puts "#{user.to_json}"
-          
+          user = User.find_by(email: sign_up_params[:email])         
           if user && user.valid_password?(sign_up_params[:password])
             sign_in(user)
             redirect_to root_path, notice: 'Logged in successfully.'

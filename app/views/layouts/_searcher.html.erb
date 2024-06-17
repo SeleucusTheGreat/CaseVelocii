@@ -1,0 +1,26 @@
+<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+  <%= form_with url: home_index_path, method: :get, local: true, class: "form-inline" do |f| %>
+    <ul class="navbar-nav">
+      <li class="nav-item mx-2">
+        <%= f.text_field :max_price, placeholder: "Max Price", class: "form-control" %>
+      </li>
+      <li class="nav-item mx-2">
+        <%= f.text_field :num_rooms, placeholder: "Number of Rooms", class: "form-control" %>
+      </li>
+      <li class="nav-item mx-2">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="city-select">City</label>
+          </div>
+          <%= f.select :city, options_for_select(['Rome', 'Milan', 'Pisa']), { include_blank: 'Select a City' }, { class: "form-select", id: "city-select" } %>
+        </div>
+      </li>
+      <li class="nav-item mx-2">
+        <%= f.submit "Search", class: "btn btn-primary" %>
+      </li>
+    </ul>
+  <% end %>
+</div>
+
+
+   
