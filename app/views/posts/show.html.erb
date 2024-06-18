@@ -1,13 +1,13 @@
 <div class="container mt-5">
   <div class="custom-card card">
     <div class="card-body">
-      <h3 class="card-title text-center">Title</h3>
+      <h3 class="card-title text-center"><%= @post.title%> </h3>
       <div class="row justify-content-center">
         <div class="col-md-4 text-center">
           <% if @post.photos.attached? %>
             <%= render "posts/caruousel"%>
           <% else %>
-            <%= render "posts/carousel"%>
+            <%= render "posts/caruousel"%>
             <!--<%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 500px; height: 500px; border-radius: 50%; object-fit: cover;" %>-->
           <% end %>
         </div>
@@ -19,14 +19,14 @@
       <h3 class="card-title text-center">Property Details</h3>
       <div class="row">
         <div class="col-md-6">
-          <p><strong>Address: </strong><%= @post.address%> </p>
-          <p><strong>city: </strong><%= @post.city%> </p>
-          <p><strong>number of Romms: </strong> <%= @post.numer_rooms%></p>
-          <p><strong>Square feet: </strong> <%= @post.square_feet%></p>
-          <p><strong>Floor Number: </strong><%= @post.floor%> </p>
+          <strong>Address: </strong> <p><%= @post.address%> </p>
+          <strong>City: </strong> <p><%= @post.city%> </p>
+          <strong>Number of Romms: </strong> <p><%= @post.numer_rooms%></p>
         </div>
         <div class="col-md-6">
-          <p><strong>Price:</strong><%= @post.price%></p>
+         <strong>Price:</strong><p><%= @post.price%></p>
+         <strong>Square feet: </strong> <p><%= @post.square_feet%></p>
+        <strong>Floor Number: </strong> <p><%= @post.floor%> </p>
         </div>
       </div>
     </div>
