@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_many :posts
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
+  has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.aid).first_or_create do |user|
@@ -14,8 +16,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.full_name = auth.info.name 
       user.avatar_url = auth.info.image
-      #use this line only if I want to use confirmation email
-      #user.skip_comnfirmatio! 
     end
   end
 

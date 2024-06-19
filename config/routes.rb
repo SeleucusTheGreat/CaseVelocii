@@ -32,4 +32,11 @@ Rails.application.routes.draw do
     get "sign_in", to: "users/log_in#login"
     post "sign_up", to: "users/sign_up#signup"
   end
+
+  
+  resources :posts do
+    resources :messages, only: [:create]
+  end
+  
+
 end

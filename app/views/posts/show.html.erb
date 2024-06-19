@@ -8,7 +8,7 @@
             <%= render "posts/caruousel"%>
           <% else %>
             <%= render "posts/caruousel"%>
-            <!--<%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 500px; height: 500px; border-radius: 50%; object-fit: cover;" %>-->
+            <!--<%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 400px; height: 400px; border-radius: 50%; object-fit: cover;" %>-->
           <% end %>
         </div>
       </div>
@@ -66,3 +66,14 @@
     </div>
   </div>
 </div>
+
+<h2>Send a Message</h2>
+<%= form_with model: [@post, Message.new], local: true do |form| %>
+  <div class="mb-3">
+      <%= form.label :content, style: "display: block" %>
+      <%= form.text_area :content, class: "form-control" %>
+  </div>
+  <div class="text-center">
+      <%= form.submit 'Submit', class: "btn btn-primary" %>
+  </div>
+<% end %>
