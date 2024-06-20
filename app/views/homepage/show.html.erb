@@ -40,7 +40,50 @@
       </div>
     </div>
   </div>
-  
+  <div class="text-center mt-5 mb-5">
+    <h2>Messages Incoming:</h2>
+  </div>
+  <div class="container">
+  <div class="row">
+    <% @user.received_messages.each do |message| %>
+      <div class="col-md-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              
+              <div class="col-md-2 text-center d-flex flex-column align-items-center">
+                <p><strong>User:</strong></p>
+                <% if message.sender.avatar.attached? %>
+                  <%= image_tag message.sender.avatar, class: 'img-fluid rounded-circle', style: 'width: 80px; height: 80px; border-radius: 50%; object-fit: cover;' %>
+                <% else %>
+                  <%= image_tag 'logo.png', class: 'img-fluid rounded-circle', style: 'width: 80px; height: 80px; border-radius: 50%; object-fit: cover;' %>
+                <% end %>
+                <p><strong><%= message.sender.full_name %></strong></p>
+              </div>
+              
+              <div class="col-md-8 bg-light">
+                <p class="text-center fst-italic "><%= message.content %></p>
+              </div>
+              
+              <div class="col-md-2 text-center d-flex flex-column align-items-center">
+                <p><strong>House:</strong></p>
+                <% if message.post.photos.attached? %>
+                  <%= image_tag message.post.photos.first, class: 'img-fluid', style: 'width: 80px; height: 80px; border-radius: 50%; object-fit: cover;' %>
+                <% else %>
+                  <%= image_tag 'logo.png', class: 'img-fluid rounded-circle', style: 'width: 80px; height: 80px; border-radius: 50%; object-fit: cover;' %>
+                <% end %>
+                <p><strong><%= message.post.title %></strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="text-muted text-center"><small><%= time_ago_in_words(message.created_at) %> ago</small></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
 
 
 
