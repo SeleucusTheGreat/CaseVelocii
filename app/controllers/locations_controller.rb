@@ -3,7 +3,17 @@ class LocationsController < ApplicationController
 
   # GET /locations or /locations.json
   def index
-    @locations = Location.all
+    if params[:place].present?
+      begin
+        @locations = Location.near(params[:place], params[:radius], order: :distance)
+      rescue Geocoder::Error => e
+        Rails.logger.error("Geocoding error: #{e.message}")
+        flash[:alert] = "There was a problem with the geocoding service. Please try again later."
+        @locations = Location.all
+      end
+    else
+      @locations = Location.all
+    end
   end
 
   # GET /locations/1 or /locations/1.json

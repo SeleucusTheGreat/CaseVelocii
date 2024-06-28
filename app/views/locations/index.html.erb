@@ -2,6 +2,21 @@
 
 <h1>Locations</h1>
 
+<%= form_with url: locations_path, method: :get do |form|%>
+ 
+
+  <div class="mb-3">
+     <%= form.label :place, style: "display: block" %>
+     <%= form.text_field :place, class: "form-control" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= form.label :radius, style: "display: block" %>
+    <%= form.number_field :radius, step: :any, class: "form-control" %>
+   </div>
+  <%= form.submit %>
+<%end%>
+
 <div id="locations">
   <% @locations.each do |location| %>
     <%= render location %>
