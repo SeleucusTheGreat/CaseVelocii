@@ -1,10 +1,17 @@
+
+
+
+
+<!--<script
+    src="https://maps.googleapis.com/maps/api/js?key=<%=Rails.application.credentials.dig(:GOOGLE_MAPS_API_KEY)%>&loading=async&libraries=maps,marker&v=beta" defer>
+</script>-->
+
+
 <p style="color: green"><%= notice %></p>
 
 <h1>Locations</h1>
 
 <%= form_with url: locations_path, method: :get do |form|%>
- 
-
   <div class="mb-3">
      <%= form.label :place, style: "display: block" %>
      <%= form.text_field :place, class: "form-control" %>
@@ -20,9 +27,21 @@
 <div id="locations">
   <% @locations.each do |location| %>
     <%= render location %>
-    <p>
-      <%= link_to "Show this location", location %>
-    </p>
+
+      <div class="location-map">
+        <% if location.map_image.attached? %>
+          <%= image_tag location.map_image, style: "height: 400px; width: 400px;" %>
+        <% else %>
+          <p>Map image not available</p>
+        <% end %>
+      </div>
+
+
+   <!-- <gmp-map center="<%=location.latitude%>,<%=location.longitude%>" zoom="15" map-id="DEMO_MAP_ID" style="height: 400px; width: 400px;">
+      <gmp-advanced-marker position="<%=location.latitude%>,<%=location.longitude%>" title="<%=location.name%>, IT"></gmp-advanced-marker>
+
+    </gmp-map> -->
+
   <% end %>
 </div>
 
