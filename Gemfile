@@ -20,6 +20,7 @@ gem "devise", "~> 4.9"
 gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
+gem 'geocoder'
 
 
 group :development, :test do

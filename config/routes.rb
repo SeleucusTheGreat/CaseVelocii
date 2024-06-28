@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :locations
   
   authenticated :user do
     get 'homepage', to: "homepage#show"
