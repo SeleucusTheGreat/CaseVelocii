@@ -33,28 +33,30 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
 
-    respond_to do |format|
+    if valid_address?(@location.address)
       if @location.save
-        format.html { redirect_to location_url(@location), notice: "Location was successfully created." }
-        format.json { render :show, status: :created, location: @location }
+        redirect_to @location, notice: 'Location was successfully created.'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
+        render :new
       end
+    else
+      flash[:alert] = 'The address is not valid. Please enter a valid address.'
+      render :new
     end
   end
 
   # PATCH/PUT /locations/1 or /locations/1.json
   def update
-    respond_to do |format|
-      if @location.update(location_params)
-        format.html { redirect_to location_url(@location), notice: "Location was successfully updated." }
-        format.json { render :show, status: :ok, location: @location }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
-    end
+        if valid_address?(@location.address)
+          if @location.update(location_params)
+            redirect_to @location, notice: 'Location was successfully created.'
+          else
+            render :edit
+          end
+        else
+          flash[:alert] = 'The address is not valid. Please enter a valid address.'
+          render :edit
+        end
   end
 
   # DELETE /locations/1 or /locations/1.json
@@ -75,6 +77,11 @@ class LocationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def location_params
-      params.require(:location).permit(:name, :address, :latitude, :Longitude)
+      params.require(:location).permit(:name, :address, :latitude, :longitude)
+    end
+
+    def valid_address?(address)
+      geocoded_data = Geocoder.search(address)
+      geocoded_data.present? && geocoded_data.first&.coordinates.present?
     end
 end
