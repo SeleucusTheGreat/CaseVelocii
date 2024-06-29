@@ -17,10 +17,15 @@
               <%= form.label :description, style: "display: block" %>
               <%= form.text_area :description, class: "form-control" %>
             </div>
+
             <div class="mb-3">
-              <%= form.label :address, style: "display: block" %>
-              <%= form.text_field :address, class: "form-control" %>
+              <%= form.fields_for :location do |location_form| %>
+                <%= location_form.label :address, style: "display: block" %>
+                <%= location_form.text_field :address, class: "form-control" %>
+              <% end %>
             </div>
+
+          
             <div class="mb-3">
               <%= form.label :city %>
               <%= form.select :city, options_for_select(['Rome', 'Milan', 'Pisa']),class: "form-select" %>

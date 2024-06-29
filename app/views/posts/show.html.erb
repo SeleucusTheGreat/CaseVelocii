@@ -14,23 +14,30 @@
       </div>
     </div>
   </div>
-  <div class="card bg-light", style="border: none;">
-    <div class="card-body">
-      <h3 class="card-title text-center">Property Details</h3>
-      <div class="row">
-        <div class="col-md-6">
-          <strong>Address: </strong> <p><%= @post.address%> </p>
-          <strong>City: </strong> <p><%= @post.city%> </p>
-          <strong>Number of Romms: </strong> <p><%= @post.numer_rooms%></p>
-        </div>
-        <div class="col-md-6">
-         <strong>Price:</strong><p><%= number_to_currency(@post.price)%></p>
-         <strong>Square feet: </strong> <p><%= @post.square_feet%></p>
-        <strong>Floor Number: </strong> <p><%= @post.floor%> </p>
-        </div>
+  <div class="card bg-light border-0">
+  <div class="card-body">
+    <h3 class="card-title text-center mb-4">Property Details</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <p class="mb-3"><strong>City:</strong> <%= @post.location.address %></p>
+        <p class="mb-3"><strong>City:</strong> <%= @post.city %></p>
+        <p class="mb-3"><strong>Number of Rooms:</strong> <%= @post.numer_rooms %></p>
+        <p class="mb-3"><strong>Price:</strong> <%= number_to_currency(@post.price) %></p>
+        <p class="mb-3"><strong>Square Feet:</strong> <%= @post.square_feet %></p>
+        <p class="mb-3"><strong>Floor Number:</strong> <%= @post.floor %></p>
+      </div>
+      <div class="col-md-6 text-center">
+        <% if @post.location.map_image.attached? %>
+          <%= image_tag @post.location.map_image, class: "img-fluid", style: "max-height: 400px;" %>
+        <% else %>
+          <p>Map image not available</p>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
+
+
   <div class="card ", style="border: none;">
     <div class="card-body">
       <h3 class="card-title text-center">User Profile</h3>

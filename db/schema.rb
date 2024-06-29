@@ -44,10 +44,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_143715) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
+    t.integer "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["latitude"], name: "index_locations_on_latitude"
     t.index ["longitude"], name: "index_locations_on_Longitude"
+    t.index ["post_id"], name: "index_locations_on_post_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -66,7 +68,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_143715) do
     t.string "title"
     t.text "description"
     t.string "city", null: false
-    t.string "address"
     t.float "price"
     t.integer "numer_rooms"
     t.float "square_feet"
@@ -95,6 +96,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_143715) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "locations", "posts"
   add_foreign_key "messages", "posts"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"

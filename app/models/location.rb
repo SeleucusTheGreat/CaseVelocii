@@ -5,6 +5,7 @@ class Location < ApplicationRecord
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
   after_save :generate_map_image
   has_one_attached :map_image
+  belongs_to :post
 
   def generate_map_image
     # Only generate the map if geocoding was successful
