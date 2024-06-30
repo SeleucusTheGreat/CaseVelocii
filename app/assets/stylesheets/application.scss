@@ -82,3 +82,36 @@
   overflow: hidden;
   border: none;
 }
+
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+.card {
+  border: none;
+}
+
+.btn-sm {
+  font-size: 0.75rem;
+}
+
+.table thead.thead-dark th {
+  background-color: #1a1a1a;  /* A slightly softer black */
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-top: none;
+}
+
+.table thead.thead-dark th a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.table thead.thead-dark th a:hover {
+  color: #f8f9fa;
+  text-decoration: underline;
+}

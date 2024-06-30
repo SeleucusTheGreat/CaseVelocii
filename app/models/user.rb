@@ -19,6 +19,9 @@ class User < ApplicationRecord
     end
   end
 
+  def admin?
+    admin
+  end
 
   
 end

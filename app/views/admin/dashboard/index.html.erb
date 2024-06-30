@@ -1,0 +1,47 @@
+<div class="container-fluid mt-5">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-4">Admin Dashboard</h1>
+    </div>
+  </div>
+  
+  <div class="card shadow">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col"><%= sort_link("Title", "title") %></th>
+              <th scope="col">Content</th>
+              <th scope="col"><%= sort_link("Square Feet", "square_feet") %></th>
+              <th scope="col"><%= sort_link("Price", "price") %></th>
+              <th scope="col"><%= sort_link("Author", "author") %></th>
+              <th scope="col"><%= sort_link("Address", "address") %></th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.title %></td>
+                <td><%= truncate(post.description, length: 100) %></td>
+                <td><%= post.square_feet %></td>
+                <td><%= number_to_currency(post.price) %></td>
+                <td><%= post.user.email %></td>
+                <td><%= post.location.address %></td>
+                <td>
+                  <%= link_to edit_post_path(post), class: 'btn btn-sm btn-outline-primary mr-2' do %>
+                    <i class="fas fa-edit"></i> Edit
+                  <% end %>
+                  <%= link_to post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' do %>
+                    <i class="fas fa-trash-alt"></i> Delete
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'dashboard', to: 'dashboard#index'
+  end
+
   authenticated :user do
     get 'homepage', to: "homepage#show"
     get  "homepage_edit", to: "homepage#edit_user"
@@ -16,12 +20,7 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
- 
-  
-  namespace :api do
-    resources :users, only: :show
-    get "users_by_emails", to: "users_by_emails#show"
-  end
+
 
   devise_scope :user do
     patch "update", to: "users/edit_user#update"
@@ -33,6 +32,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :messages, only: [:create]
   end
+
   
 
 end
