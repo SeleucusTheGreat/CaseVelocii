@@ -39,47 +39,51 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="text-center mt-5 mb-5">
-    <h2>Messages Incoming:</h2>
-  </div>
-  <div class="container">
-  <div class="row">
-    <% @user.received_messages.each do |message| %>
-      <div class="col-md-12 mb-3">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-              
-              <div class="col-md-2 text-center d-flex flex-column align-items-center">
-                <p><strong>User:</strong></p>
-                <% if message.sender.avatar.attached? %>
-                  <%= image_tag message.sender.avatar, class: 'img-fluid rounded-circle', style: 'width: 80px; height: 80px; border-radius: 50%; object-fit: cover;' %>
-                <% else %>
-                  <%= image_tag 'logo.png', class: 'img-fluid rounded-circle', style: 'width: 80px; height: 80px; border-radius: 50%; object-fit: cover;' %>
-                <% end %>
-                <p><strong><%= message.sender.full_name %></strong></p>
-              </div>
-              
-              <div class="col-md-8 bg-light">
-                <p class="text-center fst-italic "><%= message.content %></p>
-              </div>
-              
-              <div class="col-md-2 text-center d-flex flex-column align-items-center">
-                <p><strong>House:</strong></p>
-                <% if message.post.photos.attached? %>
-                  <%= image_tag message.post.photos.first, class: 'img-fluid', style: 'width: 80px; height: 80px; border-radius: 50%; object-fit: cover;' %>
-                <% else %>
-                  <%= image_tag 'logo.png', class: 'img-fluid rounded-circle', style: 'width: 80px; height: 80px; border-radius: 50%; object-fit: cover;' %>
-                <% end %>
-                <p><strong><%= message.post.title %></strong></p>
+ <div class="card" style="border: none;">
+  <div class="card-body " style="border: none;">
+    <h3 class="card-title text-center mb-4">My Chats</h3>
+    <div class="d-flex flex-column align-items-center">
+      <% @user.chats.order(last_message_at: :desc).each do |chat| %>
+        <div class="col-md-8 mb-3">
+          <%= link_to post_chat_path(chat.post, chat), class: "text-decoration-none" do %>
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col-md-3 text-center">
+                    <% other_user = chat.other_user(@user) %>
+                    <% if other_user.avatar.attached? %>
+                      <%= image_tag other_user.avatar, class: 'rounded-circle mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
+                    <% else %>
+                      <%= image_tag "logo.png", class: 'rounded-circle mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
+                    <% end %>
+                    <h6 class="mb-0"><%= other_user.full_name %></h6>
+                  </div>
+                  <div class="col-md-6 text-center">
+                    <% last_message = chat.messages.order(created_at: :desc).first %>
+                    <% if last_message %>
+                      <p class="mb-0"><%= truncate(last_message.content, length: 50) %></p>
+                      <small class="text-muted">
+                        <%= last_message.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+                      </small>
+                    <% else %>
+                      <p class="text-muted mb-0">No messages yet</p>
+                    <% end %>
+                  </div>
+                  <div class="col-md-3 text-center">
+                    <% if chat.post.photos.attached? %>
+                      <%= image_tag chat.post.photos.first, class: 'rounded mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
+                    <% else %>
+                      <%= image_tag "default_post_image.png", class: 'rounded mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
+                    <% end %>
+                    <h6 class="mb-0"><%= chat.post.title %></h6>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
-        <p class="text-muted text-center"><small><%= time_ago_in_words(message.created_at) %> ago</small></p>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
 

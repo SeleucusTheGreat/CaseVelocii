@@ -1,0 +1,12 @@
+<!-- app/views/chats/index.html.erb -->
+<h1>Your Chats</h1>
+<% @chats.each do |chat| %>
+  <% post = chat.post %>
+  <% other_user = chat.other_user(current_user) %>
+  <%= link_to post_chat_path(post, chat) do %>
+    <div>
+      <p>Chat with <%= other_user.name %> about <%= post.title %></p>
+      <small>Last message: <%= chat.last_message_at&.strftime("%B %d, %Y at %I:%M %p") || 'No messages yet' %></small>
+    </div>
+  <% end %>
+<% end %>

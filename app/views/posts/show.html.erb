@@ -38,48 +38,50 @@
 </div>
 
 
-  <div class="card ", style="border: none;">
-    <div class="card-body">
-      <h3 class="card-title text-center">User Profile</h3>
-        <div class="row">
-          <div class="col-md-4 text-center bg-light">
-            <h5 class="">Profile picture:</h5>
-            <% if @user.avatar.attached?  %>
-              <%= image_tag @user.avatar, class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
-            <%else%>
-              <%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
-            <% end %>
-            <div class="card-body bg-light">
-            <p class="card-text"><strong>Owener Name:</strong> <%= @user.full_name %></p>
-            <p class="card-text"><strong>Owner Email:</strong> <%= @user.email %></p>           
-          </div>
-          </div>
-          <div class="col-md-8">
-            
-            <%if current_user && current_user!=@user%>
-              <h5>Send a Message:</h5>
-              <%= form_with model: [@post, Message.new], local: true do |form| %>
-                <div class="mb-3">
-                    <%= form.text_area :content, class: "form-control ", style:"width: 100%; height: 100%; min-height: 200px;"%>
-                </div>
-                <div class="text-center">
-                    <%= form.submit 'Submit', class: "btn btn-primary" %>
-                </div>
-              <% end %>
-            <%elsif current_user && current_user==@user%>
-              <div class="col mt-5 text-center ">
-                <%= image_tag "star.png", class: 'profile-avatar text-center' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
-                <h5>This is you!</h5>
-              </div>
-            <%else%>
-              <div class="col mt-5 text-center ">
-                <%= image_tag "message.png", class: 'profile-avatar text-center' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
-                <h5>Log in to send a message</h5>
-              </div>
-            <%end%>
-          </div>
-          
+  <div class="card", style="border: none;">
+  <div class="card-body">
+    <h3 class="card-title text-center">User Profile</h3>
+    <div class="row">
+      <div class="col-md-4 text-center bg-light">
+        <h5 class="">Profile picture:</h5>
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, class: 'profile-avatar', style: "width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" %>
+        <% else %>
+          <%= image_tag "logo.png", class: 'profile-avatar', style: "width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" %>
+        <% end %>
+        <div class="card-body bg-light">
+          <p class="card-text"><strong>Owner Name:</strong> <%= @user.full_name %></p>
+          <p class="card-text"><strong>Owner Email:</strong> <%= @user.email %></p>
         </div>
+      </div>
+      <div class="col-md-8">
+        <% if current_user && current_user != @user %>
+          <h5>Send a Message:</h5>
+          <% chat = Chat.find_or_create_by(post: @post, user1: current_user, user2: @user) %>
+          <%= form_with model: [@post, chat, Message.new], local: true do |form| %>
+            <div class="mb-3">
+              <%= form.text_area :content, class: "form-control", style: "width: 100%; height: 100%; min-height: 200px;" %>
+            </div>
+            <div class="text-center">
+              <%= form.submit 'Send Message', class: "btn btn-primary" %>
+            </div>
+            
+          <% end %>
+          <% if chat.messages.any? %>
+            <%= link_to 'View Conversation', post_chat_path(@post, chat), class: 'btn btn-secondary mt-3 text-center' %>
+          <% end %>
+        <% elsif current_user && current_user == @user %>
+          <div class="col mt-5 text-center">
+            <%= image_tag "star.png", class: 'profile-avatar text-center', style: "width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" %>
+            <h5>This is your post!</h5>
+          </div>
+        <% else %>
+          <div class="col mt-5 text-center">
+            <%= image_tag "message.png", class: 'profile-avatar text-center', style: "width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" %>
+            <h5>Log in to send a message</h5>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

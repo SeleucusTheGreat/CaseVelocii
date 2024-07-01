@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
     has_many_attached :photos
     belongs_to :user
-    has_many :messages
+    has_many :messages, through: :chats
     has_one :location, dependent: :destroy
+    has_many :chat
     accepts_nested_attributes_for :location
 
     

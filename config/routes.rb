@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'home/index'
   root "home#index"
   resources :posts
+
   devise_for :users, controllers: {
         sessions: 'users/sessions',
         omniauth_callbacks: "users/omniauth_callbacks"
@@ -30,8 +31,11 @@ Rails.application.routes.draw do
 
   
   resources :posts do
-    resources :messages, only: [:create]
+    resources :chats, only: [:show] do
+      resources :messages, only: [:create]
+    end
   end
+  resources :chats, only: [:index]
 
   
 

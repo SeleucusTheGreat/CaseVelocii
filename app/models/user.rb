@@ -7,8 +7,15 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_many :posts
-  has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
-  has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
+
+  has_many :chats_as_user1, class_name: 'Chat', foreign_key: 'user1_id'
+  has_many :chats_as_user2, class_name: 'Chat', foreign_key: 'user2_id'
+  has_many :messages, foreign_key: 'sender_id'
+
+  def chats
+    Chat.where('user1_id = :user_id OR user2_id = :user_id', user_id: id)
+  end
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.aid).first_or_create do |user|

@@ -1,11 +1,15 @@
-class CreateMessages < ActiveRecord::Migration[7.1]
+
+class CreateMessages < ActiveRecord::Migration[6.1]
   def change
     create_table :messages do |t|
-      t.text :content
-      t.references :sender, foreign_key: { to_table: :users }, null: false
-      t.references :receiver, foreign_key: { to_table: :users }, null: false
-      t.references :post, foreign_key: true , null: false
+      t.text :content, null: false
+      t.references :sender, null: false, foreign_key: { to_table: :users }
+      t.references :chat, null: false, foreign_key: true
+      t.references :post, null: false, foreign_key: true
+
       t.timestamps
     end
+
+    add_index :messages, [:chat_id, :created_at]
   end
 end
