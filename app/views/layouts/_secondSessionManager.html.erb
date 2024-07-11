@@ -1,0 +1,115 @@
+<div class="collapse navbar-collapse justify-content-end " id="navbarNavRight">
+  <% if current_user %>
+    <%= render "layouts/notifications" %>
+  <% end %>
+
+  <div class="btn-group px-2">
+    <div class="btn-bell dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <div class="profile-container">
+        <% if current_user && current_user.provider == "google_oauth2" %>
+          <%= image_tag(current_user.avatar_url, class: "profile-picture card-img-top", style: "width: 40px; height: 40px; border-radius: 50%; object-fit: cover;") %>
+        <% else %>
+          <% if current_user && current_user.avatar.attached? %>
+            <%= image_tag(current_user.avatar, class: 'profile-avatar', style: "width: 40px; height: 40px; border-radius: 50%; object-fit: cover;") %>
+          <% else %>
+            <%= render "layouts/person_icon" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <h1 class="h5 mb-3 font-weight-normal">
+      <%= if current_user
+            current_user.full_name
+          else
+            "Users"
+          end %>
+    </h1>
+    <ul class="dropdown-menu session-manager shadow-lg">
+      <% if current_user %>
+        <li><%= link_to "Homepage", homepage_path, class: "dropdown-item" %></li>
+        <li><%= link_to "My Houses", mycards_path, class: "dropdown-item" %></li>
+        <% if current_user.admin? %>
+          <li><%= link_to 'Admin Panel', admin_dashboard_path, class: "dropdown-item" %></li>
+        <% end %>
+        <li><hr class="dropdown-divider"></li>
+        <li><%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+      <% else %>
+        <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#UserModal">Log in</button></li>
+        <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign up</button></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+<style>
+
+.btn-bell {
+  position: relative;
+  cursor: pointer;
+}
+
+
+.dropdown-menu {
+  max-height: 400px;
+  overflow-y: auto;
+  min-width: 300px;
+}
+
+
+.dropdown-header {
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.dropdown-item {
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+
+.dropdown-item strong {
+  font-size: 1rem;
+}
+
+.dropdown-item span {
+  font-size: 0.875rem;
+}
+
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+
+.profile-container {
+  display: flex;
+  align-items: center;
+}
+
+
+.profile-picture, .profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+.session-manager {
+  margin-top: 0.5rem;
+}
+
+
+.navbar-collapse h1 {
+  margin-left: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+</style>

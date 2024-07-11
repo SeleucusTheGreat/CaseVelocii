@@ -1,0 +1,45 @@
+.btn-bell {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  /* Style for the dropdown menu */
+  .dropdown-menu {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  /* Style for dropdown headers */
+  .dropdown-header {
+    font-size: 1.1rem;
+    padding: 0.5rem 1.5rem;
+  }
+  
+  /* Style for dropdown items */
+  .dropdown-item {
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Notification sender name */
+  .dropdown-item strong {
+    font-size: 1rem;
+  }
+  
+  /* Notification message */
+  .dropdown-item span {
+    font-size: 0.875rem;
+  }
+  
+  /* Read notifications style */
+  .text-muted {
+    color: #6c757d !important;
+  }
+  
+  /* Unread notifications style */
+  .text-danger {
+    color: #dc3545 !important;
+  }
+
+  

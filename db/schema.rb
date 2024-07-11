@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_01_133804) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_11_120744) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -78,6 +78,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_133804) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "recipient_id", null: false
+    t.integer "sender_id", null: false
+    t.integer "message_id", null: false
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_notifications_on_message_id"
+    t.index ["recipient_id", "read"], name: "index_notifications_on_recipient_id_and_read"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
+    t.index ["sender_id"], name: "index_notifications_on_sender_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -118,5 +132,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_133804) do
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "posts"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "notifications", "messages"
+  add_foreign_key "notifications", "users", column: "recipient_id"
+  add_foreign_key "notifications", "users", column: "sender_id"
   add_foreign_key "posts", "users"
 end

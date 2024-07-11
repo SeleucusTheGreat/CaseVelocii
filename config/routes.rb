@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
   end
 
+  
   authenticated :user do
+    get 'notifications/:id', to: 'notifications#mark_and_redirect', as: 'mark_and_redirect_notification'
     get 'homepage', to: "homepage#show"
     get  "homepage_edit", to: "homepage#edit_user"
     get "mycards", to: "posts#mycards"

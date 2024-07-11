@@ -1,0 +1,48 @@
+
+<div class="btn-group dropleft">
+  <% if current_user %>
+    <div class="btn-bell dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= render "layouts/bell" %>
+      <% if current_user.received_notifications.unread.any? %>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <%= current_user.received_notifications.unread.length %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+
+  <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 300px;">
+    <% current_user.received_notifications.unread.each do |notification| %>
+      <li>
+        <%= link_to mark_and_redirect_notification_path(notification), class: 'dropdown-item' do %>
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+              <strong class="text-danger"><%= notification.message.sender.full_name %></strong>
+              <span class="small  d-block text-danger">sent you a message!</span>
+            </div>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+
+    <% current_user.received_notifications.read.each do |notification| %>
+      <li>
+        <%= link_to mark_and_redirect_notification_path(notification), class: 'dropdown-item' do %>
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+              <strong class="text-muted"><%= notification.message.sender.full_name %></strong>
+              <span class="small text-muted d-block">sent you a message!</span>
+            </div>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+
+
+
+
+
+
