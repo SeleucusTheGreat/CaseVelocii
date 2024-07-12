@@ -78,7 +78,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_120744) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
-
   create_table "notifications", force: :cascade do |t|
     t.integer "recipient_id", null: false
     t.integer "sender_id", null: false
@@ -98,7 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_120744) do
     t.string "city", null: false
     t.float "price"
     t.integer "numer_rooms"
-    t.float "square_feet"
+    t.float "square_meters"
     t.integer "floor"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false

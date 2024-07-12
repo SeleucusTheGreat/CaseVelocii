@@ -20,14 +20,18 @@
         <p class="card-text"><strong>city:</strong> <%= post.city %></p>
         <p class="card-text"><strong>Price:</strong> <%= number_to_currency(post.price) %></p>
         <p class="card-text"><strong>Number of Rooms:</strong> <%= post.numer_rooms %></p>
-        <p class="card-text"><strong>Square Feet:</strong> <%= post.square_feet %></p>
+        <p class="card-text"><strong>Square Meters:</strong> <%= post.square_meters %></p>
         <p class="card-text"><strong>Floor:</strong> <%= post.floor %></p>
 
         <div class="text-center mt-3">
-          <%= link_to 'Edit', edit_post_path(post), class: "btn btn-primary" %>
-          <%= link_to 'Show', post_path(post), class: "btn btn-secondary" %>
-          <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <%= link_to 'Show', post_path(post), class: "btn btn-secondary" %>
+            <%= link_to 'Edit', edit_post_path(post), class: "btn btn-primary" %>
+            <%= button_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          </div>
         </div>
+
+
       </div>
     </div>
   <% end %>

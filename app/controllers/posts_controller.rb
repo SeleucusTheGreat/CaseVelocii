@@ -60,7 +60,7 @@ class PostsController < ApplicationController
     @post.destroy!
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_to root_path, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -74,7 +74,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :description, :price, :numer_rooms, :square_feet, :city, :floor, photos: [], location_attributes: [:address])
+      params.require(:post).permit(:title, :description, :price, :numer_rooms, :square_meters, :city, :floor, photos: [], location_attributes: [:address])
       
     end
 end

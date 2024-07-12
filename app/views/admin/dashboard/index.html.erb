@@ -13,7 +13,7 @@
             <tr>
               <th scope="col"><%= sort_link("Title", "title") %></th>
               <th scope="col">Content</th>
-              <th scope="col"><%= sort_link("Square Feet", "square_feet") %></th>
+              <th scope="col"><%= sort_link("Square Feet", "square_meters") %></th>
               <th scope="col"><%= sort_link("Price", "price") %></th>
               <th scope="col"><%= sort_link("Author", "author") %></th>
               <th scope="col"><%= sort_link("Address", "address") %></th>
@@ -25,17 +25,19 @@
               <tr>
                 <td><%= post.title %></td>
                 <td><%= truncate(post.description, length: 100) %></td>
-                <td><%= post.square_feet %></td>
+                <td><%= post.square_meters %></td>
                 <td><%= number_to_currency(post.price) %></td>
                 <td><%= post.user.email %></td>
                 <td><%= post.location.address %></td>
                 <td>
-                  <%= link_to edit_post_path(post), class: 'btn btn-sm btn-outline-primary mr-2' do %>
-                    <i class="fas fa-edit"></i> Edit
-                  <% end %>
-                  <%= link_to post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' do %>
-                    <i class="fas fa-trash-alt"></i> Delete
-                  <% end %>
+                  <div class="d-inline-flex">
+                    <%= link_to edit_post_path(post), class: 'btn btn-sm btn-outline-primary me-2' do %>
+                      <i class="fas fa-edit"></i> Edit
+                    <% end %>
+                    <%= button_to post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' do %>
+                      <i class="fas fa-trash-alt"></i> Delete
+                    <% end %>
+                  </div>
                 </td>
               </tr>
             <% end %>

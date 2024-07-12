@@ -13,7 +13,7 @@
     
 
 
-    <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 300px;">
+    <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 300px; max-height: 400px; overflow-y: auto;">
       <% if !current_user.received_notifications.any?%>
         <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
@@ -21,7 +21,7 @@
                 </div>
           </div>
       <%else%>
-        <% current_user.received_notifications.unread.order(created_at: :desc).each do |notification| %>
+        <% current_user.received_notifications.unread.order(created_at: :desc).limit(30).each do |notification| %>
           <li>
             <%= link_to mark_and_redirect_notification_path(notification), class: 'dropdown-item' do %>
               <div class="d-flex align-items-center">
@@ -34,7 +34,7 @@
           </li>
         <% end %>
 
-        <% current_user.received_notifications.read.order(created_at: :desc).each do |notification| %>
+        <% current_user.received_notifications.read.order(created_at: :desc).limit(10).each do |notification| %>
           <li>
             <%= link_to mark_and_redirect_notification_path(notification), class: 'dropdown-item' do %>
               <div class="d-flex align-items-center">
