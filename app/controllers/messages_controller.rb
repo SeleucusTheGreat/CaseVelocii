@@ -1,8 +1,13 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post_and_chat
+  before_action :set_post
 
   def create
+    if params[:chat_id] == 'new'
+      @chat =  Chat.find_or_create_by(post: @post, user1: current_user, user2: @post.user)
+    else
+      @chat =  Chat.find(params[:chat_id])
+    end
     @message = @chat.messages.new(message_params)
     @message.sender = current_user
     @message.post = @post
@@ -16,9 +21,8 @@ class MessagesController < ApplicationController
 
   private
 
-  def set_post_and_chat
+  def set_post
     @post = Post.find(params[:post_id])
-    @chat = Chat.find(params[:chat_id])
   end
 
   def message_params
