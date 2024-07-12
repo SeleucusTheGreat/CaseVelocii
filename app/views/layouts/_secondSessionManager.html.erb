@@ -26,7 +26,7 @@
     </h1>
     <ul class="dropdown-menu session-manager shadow-lg">
       <% if current_user %>
-        <li><%= link_to "Homepage", homepage_path, class: "dropdown-item" %></li>
+        <li><%= link_to "Userpage", userpage_path, class: "dropdown-item" %></li>
         <li><%= link_to "My Houses", mycards_path, class: "dropdown-item" %></li>
         <% if current_user.admin? %>
           <li><%= link_to 'Admin Panel', admin_dashboard_path, class: "dropdown-item" %></li>
@@ -36,6 +36,8 @@
       <% else %>
         <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#UserModal">Log in</button></li>
         <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SignUpModal">Sign up</button></li>
+        <!--<li><%= link_to "Normal Login", new_user_session_path, class: "dropdown-item" %></li>
+        <li><%= link_to "Normal Signup", new_user_registration_path, class: "dropdown-item" %></li> -->
       <% end %>
     </ul>
   </div>

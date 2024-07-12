@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body"  data-controller="form-validation">
-                <%= form_with url: sign_up_path, method: :post , scope: :user   do |f|%>
+                <%= form_with url: sign_up_modal_path, method: :post , scope: :user   do |f|%>
                   <div class="field">
                     <%= f.label "full name" %><br />
                     <%= f.text_field :full_name, autofocus: true, autocomplete: "your full name ", class:"form-control" , placeholder: "John Smith ",  minlength: 5, maxlength: 50 ,data: { target: "form-validation.name" } ,required: true %>

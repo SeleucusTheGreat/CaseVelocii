@@ -6,14 +6,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_with url: sign_in_path, method: :get , scope: :user do |f|%>
+        <%= form_with url: sign_in_modal_path, method: :get , scope: :user do |f|%>
             <div class="mb-3">
-                <%=f.label "Email:", class:"form-label"%>
-                <%=f.email_field :email, class:"form-control" , placeholder: "john@email.com"%>  
+              <%= f.label "Email:", class: "form-label" %>
+                <%= f.email_field :email, class: "form-control", placeholder: "john@email.com", minlength: 5, maxlength: 20 %>  
             </div>
             <div class="mb-3">
-                <%= f.label :password %><br>
-                <%= f.password_field :password, autocomplete: "current-password" , class:"form-control" %>
+              <%= f.label :password %><br>
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control", minlength: 5, maxlength: 20 %>
             </div>
             <div class="d-grid gap-2">
                 <%= f.submit "Continue", class:"btn btn-danger" %>

@@ -1,43 +1,55 @@
 
 <div class="btn-group dropleft">
   <% if current_user %>
-    <div class="btn-bell dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-      <%= render "layouts/bell" %>
-      <% if current_user.received_notifications.unread.any? %>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          <%= current_user.received_notifications.unread.length %>
-        </span>
-      <% end %>
-    </div>
+      <div class="btn-bell dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= render "layouts/bell" %>
+        <% if current_user.received_notifications.unread.any? %>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <%= current_user.received_notifications.unread.length %>
+          </span>
+        <% end %>
+      </div>
+    
+    
+
+
+    <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 300px;">
+      <% if !current_user.received_notifications.any?%>
+        <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                  <span class="small text-muted d-block text-center">No Notifications</span>
+                </div>
+          </div>
+      <%else%>
+        <% current_user.received_notifications.unread.order(created_at: :desc).each do |notification| %>
+          <li>
+            <%= link_to mark_and_redirect_notification_path(notification), class: 'dropdown-item' do %>
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                  <strong class="text-danger"><%= notification.message.sender.full_name %></strong>
+                  <span class="small  d-block text-danger">sent you a message!</span>
+                </div>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+
+        <% current_user.received_notifications.read.order(created_at: :desc).each do |notification| %>
+          <li>
+            <%= link_to mark_and_redirect_notification_path(notification), class: 'dropdown-item' do %>
+              <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                  <strong class="text-muted"><%= notification.message.sender.full_name %></strong>
+                  <span class="small text-muted d-block">sent you a message!</span>
+                </div>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+
+      <%end%>
+    </ul>
   <% end %>
-
-  <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="min-width: 300px;">
-    <% current_user.received_notifications.unread.each do |notification| %>
-      <li>
-        <%= link_to mark_and_redirect_notification_path(notification), class: 'dropdown-item' do %>
-          <div class="d-flex align-items-center">
-            <div class="flex-grow-1">
-              <strong class="text-danger"><%= notification.message.sender.full_name %></strong>
-              <span class="small  d-block text-danger">sent you a message!</span>
-            </div>
-          </div>
-        <% end %>
-      </li>
-    <% end %>
-
-    <% current_user.received_notifications.read.each do |notification| %>
-      <li>
-        <%= link_to mark_and_redirect_notification_path(notification), class: 'dropdown-item' do %>
-          <div class="d-flex align-items-center">
-            <div class="flex-grow-1">
-              <strong class="text-muted"><%= notification.message.sender.full_name %></strong>
-              <span class="small text-muted d-block">sent you a message!</span>
-            </div>
-          </div>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
 </div>
 
 

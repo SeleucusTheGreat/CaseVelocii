@@ -9,7 +9,11 @@
             <% if @user.avatar.attached?  %>
               <%= image_tag @user.avatar, class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
             <%else%>
-              <%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
+              <% if current_user && current_user.provider == "google_oauth2" %>
+                <%= image_tag(current_user.avatar_url, class: "profile-picture  card-img-top" , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " ) %>
+              <% else %>
+                <%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
+              <%end%>
             <% end %>
             
           </div>
@@ -33,7 +37,7 @@
             </table>
           </div>
           <div class="text-center">
-            <%= link_to 'Edit Profile', homepage_edit_path, class: 'btn btn-primary  ' %>
+            <%= link_to 'Edit Profile', userpage_edit_path, class: 'btn btn-primary  ' %>
             <%= link_to 'Show me my Houses', mycards_path, class: 'btn btn-danger  ' %>
           </div>
         </div>
