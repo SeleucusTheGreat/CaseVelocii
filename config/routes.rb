@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
   get 'home/index'
   root "home#index"
-  resources :posts
+  
 
   devise_for :users, skip: [:passwords, :confirmations, :unlocks, :sessions, :registrations],  controllers: {
         omniauth_callbacks: "users/omniauth_callbacks"
@@ -33,11 +33,14 @@ Rails.application.routes.draw do
   end
 
   
-  resources :posts do
+
+  concern :chattable do
     resources :chats, only: [:show] do
       resources :messages, only: [:create]
     end
   end
+
+  resources :posts, concerns: :chattable
   resources :chats, only: [:index]
 
   get "up" => "rails/health#show", as: :rails_health_check

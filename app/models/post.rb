@@ -4,7 +4,7 @@ class Post < ApplicationRecord
     has_one :location, dependent: :destroy
     has_many :chat, dependent: :destroy
     accepts_nested_attributes_for :location
-
+    validate :validate_photos_count
     
 
       scope :price_less_than, ->(price) { where("price <= ?", price) }
@@ -21,5 +21,13 @@ class Post < ApplicationRecord
         end
       }
 
+      
+
+      private
     
+      def validate_photos_count
+        if photos.size > 10
+          errors.add(:photos, "You can upload a maximum of 10 photos.")
+        end
+      end
 end

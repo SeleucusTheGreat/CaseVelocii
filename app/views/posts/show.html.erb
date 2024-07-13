@@ -1,85 +1,85 @@
 <div class="container mt-5">
-  <div class="custom-card card">
+  <div class="card mb-4 shadow-sm">
     <div class="card-body">
-      <h3 class="card-title text-center"><%= @post.title%> </h3>
-      <div class="row justify-content-center">
-        <div class="col-md-4 text-center">
-          <% if @post.photos.attached? %>
-            <%= render "posts/caruousel"%>
+      <h2 class="card-title text-center mb-4"><%= @post.title %></h2>
+      <% if @post.photos.attached? %>
+        <%= render "posts/display_photos" %>
+      <% else %>
+        <div class="text-center">
+          <%= image_tag "logo.png", class: 'img-fluid', style: "max-width: 400px; max-height: 400px; width: auto; height: auto;" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Property Details</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Address:</strong> <%= @post.location.address %></p>
+          <p><strong>City:</strong> <%= @post.city %></p>
+          <p><strong>Number of Rooms:</strong> <%= @post.numer_rooms %></p>
+          <p><strong>Price:</strong> <%= number_to_currency(@post.price) %></p>
+          <p><strong>Square Meters:</strong> <%= @post.square_meters %></p>
+          <p><strong>Floor Number:</strong> <%= @post.floor %></p>
+        </div>
+        <div class="col-md-6">
+          <% if @post.location.map_image.attached? %>
+            <div class="text-center">
+              <%= image_tag @post.location.map_image, class: "img-fluid", style: "max-width: 100%; height: auto;" %>
+            </div>
           <% else %>
-            <%= render "posts/caruousel"%>
-            <!--<%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 400px; height: 400px; border-radius: 50%; object-fit: cover;" %>-->
+            <div class="text-center text-muted">Map image not available</div>
           <% end %>
         </div>
       </div>
     </div>
   </div>
-  <div class="card bg-light border-0">
-  <div class="card-body">
-    <h3 class="card-title text-center mb-4">Property Details</h3>
-    <div class="row">
-      <div class="col-md-6">
-        <p class="mb-3"><strong>City:</strong> <%= @post.location.address %></p>
-        <p class="mb-3"><strong>City:</strong> <%= @post.city %></p>
-        <p class="mb-3"><strong>Number of Rooms:</strong> <%= @post.numer_rooms %></p>
-        <p class="mb-3"><strong>Price:</strong> <%= number_to_currency(@post.price) %></p>
-        <p class="mb-3"><strong>Square Meters:</strong> <%= @post.square_meters %></p>
-        <p class="mb-3"><strong>Floor Number:</strong> <%= @post.floor %></p>
-      </div>
-      <div class="col-md-6 text-center">
-        <% if @post.location.map_image.attached? %>
-          <%= image_tag @post.location.map_image, class: "img-fluid", style: "max-height: 400px;" %>
-        <% else %>
-          <p>Map image not available</p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-  <div class="card", style="border: none;">
-  <div class="card-body">
-    <h3 class="card-title text-center">User Profile</h3>
-    <div class="row">
-      <div class="col-md-4 text-center bg-light">
-        <h5 class="">Profile picture:</h5>
-        <% if @user.avatar.attached? %>
-          <%= image_tag @user.avatar, class: 'profile-avatar', style: "width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" %>
-        <% else %>
-          <%= image_tag "logo.png", class: 'profile-avatar', style: "width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" %>
-        <% end %>
-        <div class="card-body bg-light">
-          <p class="card-text"><strong>Owner Name:</strong> <%= @user.full_name %></p>
-          <p class="card-text"><strong>Owner Email:</strong> <%= @user.email %></p>
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Owner Profile</h3>
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar, class: 'rounded-circle mb-3', style: "width: 150px; height: 150px; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag "logo.png", class: 'rounded-circle mb-3', style: "width: 150px; height: 150px; object-fit: cover;" %>
+          <% end %>
+          <p><strong><%= @user.full_name %></strong></p>
+          <p class="text-muted"><%= @user.email %></p>
+          <% if current_user && current_user == @user %>
+            <%= link_to 'Modify Post', edit_post_path(@post), class: 'btn btn-warning mt-3' %>
+          <% end %>
         </div>
-      </div>
-      <div class="col-md-8">
-        <% if current_user && current_user != @user %>
-          <h5>Send a Message:</h5>
+        <div class="col-md-8">
+          <% if current_user && current_user != @user %>
+            <h5>Send a Message:</h5>
             <%= form_with url: post_chat_messages_path(@post, chat_id: 'new'), local: true do |form| %>
               <div class="mb-3">
-                <%= form.text_area :content, name: 'message[content]', class: "form-control", style: "width: 100%; height: 100%; min-height: 200px;" %>
+                <%= form.text_area :content, name: 'message[content]', class: "form-control", rows: 4 %>
               </div>
               <div class="d-flex justify-content-center align-items-center gap-2">
-                <%= form.submit 'Send Message', class: "btn btn-primary" %>
+                <%= form.submit 'Send Message', class: "btn btn-primary text-center" %>
                 <% chat = Chat.find_by(post: @post, user1: current_user, user2: @user) %>
                 <% if chat&.messages&.any? %>
-                  <%= link_to 'View Conversation', post_chat_path(@post, chat), class: 'btn btn-secondary' %>
+                  <%= link_to 'View Conversation', post_chat_path(@post, chat), class: 'btn btn-secondary text-center' %>
                 <% end %>
               </div>
             <% end %>
-        <% elsif current_user && current_user == @user %>
-          <div class="col mt-5 text-center">
-            <%= image_tag "star.png", class: 'profile-avatar text-center', style: "width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" %>
-            <h5>This is your post!</h5>
-          </div>
-        <% else %>
-          <div class="col mt-5 text-center">
-            <%= image_tag "message.png", class: 'profile-avatar text-center', style: "width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" %>
-            <h5>Log in to send a message</h5>
-          </div>
-        <% end %>
+          <% elsif current_user && current_user == @user %>
+            <div class="text-center mt-4">
+              <%= image_tag "star.png", class: 'rounded-circle mb-3', style: "width: 100px; height: 100px; object-fit: cover;" %>
+              <h5>This is your post!</h5>
+            </div>
+          <% else %>
+            <div class="text-center mt-4">
+              <%= image_tag "message.png", class: 'rounded-circle mb-3', style: "width: 100px; height: 100px; object-fit: cover;" %>
+              <h5>Log in to send a message</h5>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

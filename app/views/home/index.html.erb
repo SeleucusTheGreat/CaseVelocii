@@ -10,13 +10,13 @@
         <div class="shadow-sm p-3 mb-5 bg-light rounded card h-100 custom-card" data-controller="cards" data-cards-target="card" data-action="click->cards#explore" data-url="<%= post_path(post) %>">
           <% if post.photos.attached? %>
             <div class="row justify-content-center mb-3">
-              <% post.photos.each do |photo| %>
-                <div class="col-12">
-                  <%= image_tag photo, class: "img-fluid" , style: "width: 400px; height: 400px; " %>
-                </div>
-              <% end %>
+              
+              <%= image_tag post.photos[0], class: "img-fluid" , style: "width: 400px; height: 400px; " %>
+                
             </div>
-          <% end %>
+          <% else %>
+            <%= image_tag "logo.png", class: 'img-fluid' , style: "width: 380px; height: 400px; " %>
+          <%end%>
           <div class="card-body bg-light">
             <p class="card-text"><strong>Address:</strong> <%= post.location.address %></p>
             <p class="card-text"><strong>Price:</strong> <%= number_to_currency(post.price) %></p>

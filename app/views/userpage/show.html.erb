@@ -77,7 +77,7 @@
                     <% if chat.post.photos.attached? %>
                       <%= image_tag chat.post.photos.first, class: 'rounded mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
                     <% else %>
-                      <%= image_tag "default_post_image.png", class: 'rounded mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
+                      <%= image_tag "logo.png", class: 'rounded mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
                     <% end %>
                     <h6 class="mb-0"><%= chat.post.title %></h6>
                   </div>

@@ -7,11 +7,11 @@
 
         <% if post.photos.attached? %>
           <div class="row justify-content-center mb-3">
-            <% post.photos.each do |photo| %>
-              <div class="col-md-3">
-                <%= image_tag photo, class: "img-fluid" %>
-              </div>
-            <% end %>
+            <%= image_tag post.photos[0], class: "img-fluid", style: "width: 400px; height: 400px;" %>
+          </div>
+        <%else%>
+           <div class="row justify-content-center mb-3">
+            <%= image_tag "logo.png", class: 'img-fluid' , style: "width: 400px; height: 400px;" %>
           </div>
         <% end %>
 
