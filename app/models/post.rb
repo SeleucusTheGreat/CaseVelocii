@@ -10,7 +10,16 @@ class Post < ApplicationRecord
       scope :price_less_than, ->(price) { where("price <= ?", price) }
       scope :in_city, ->(city) { where(city: city) }
       scope :with_meters, ->(square_meters) { where("square_meters <= ?", square_meters) }
-      scope :near_location, ->(address, radius) { near(address, radius) }
+      scope :near_location, ->(address, radius) { 
+        loc = Location.new(address: address)
+        result = loc.geocode
+        if result.nil?
+          none
+        else
+          locations =Location.near(result, radius) 
+          joins(:location).where(locations: { id: locations.map(&:id) })
+        end
+      }
 
     
 end
