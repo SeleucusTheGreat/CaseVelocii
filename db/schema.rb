@@ -41,19 +41,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_120744) do
 
   create_table "chats", force: :cascade do |t|
     t.integer "post_id", null: false
-    t.integer "user1_id", null: false
-    t.integer "user2_id", null: false
+    t.integer "buyer_id", null: false
+    t.integer "owner_id", null: false
     t.datetime "last_message_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id", "user1_id", "user2_id"], name: "index_chats_on_post_id_and_user1_id_and_user2_id", unique: true
+    t.index ["buyer_id"], name: "index_chats_on_buyer_id"
+    t.index ["owner_id"], name: "index_chats_on_owner_id"
     t.index ["post_id"], name: "index_chats_on_post_id"
-    t.index ["user1_id"], name: "index_chats_on_user1_id"
-    t.index ["user2_id"], name: "index_chats_on_user2_id"
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
@@ -125,8 +123,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_120744) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "posts"
-  add_foreign_key "chats", "users", column: "user1_id"
-  add_foreign_key "chats", "users", column: "user2_id"
+  add_foreign_key "chats", "users", column: "buyer_id"
+  add_foreign_key "chats", "users", column: "owner_id"
   add_foreign_key "locations", "posts"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "posts"

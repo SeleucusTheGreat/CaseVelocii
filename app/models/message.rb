@@ -11,7 +11,7 @@ class Message < ApplicationRecord
     private
   
     def create_notification
-      recipient = chat.user1_id == sender_id ? chat.user2 : chat.user1
+      recipient = chat.buyer_id == sender_id ? chat.owner : chat.buyer
       notif = Notification.create(
         recipient: recipient,
         sender: sender,

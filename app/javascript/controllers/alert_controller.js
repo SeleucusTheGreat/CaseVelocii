@@ -5,37 +5,42 @@ export default class extends Controller {
   static targets = ["alert", "notice"];
 
   connect() {
-    console.log("connected to alerts");
+    console.log("Connected to alerts controller");
+    console.log("Notice target:", this.hasNoticeTarget);
+    console.log("Alert target:", this.hasAlertTarget);
+
     if (this.hasNoticeTarget) {
       this.fadeIn(this.noticeTarget);
-      this.fadeOut(this.noticeTarget);
     }
+
     if (this.hasAlertTarget) {
       this.fadeIn(this.alertTarget);
-      this.fadeOut(this.alertTarget);
     }
-    
   }
-
 
   fadeIn(element) {
     if (element) {
-      
-        enter(element);
-        console.log("element fadedIn"); 
+      console.log("Fading in element:", element);
+      enter(element).then(() => {
+        console.log("Element faded in");
+        this.fadeOut(element);
+      });
     } else {
-      console.log("no element");
+      console.log("No element to fade in");
     }
   }
 
   fadeOut(element) {
     if (element) {
+      console.log("Setting timeout to fade out element");
       setTimeout(() => {
-        leave(element);
-        console.log("element fadedOut"); 
+        console.log("Fading out element:", element);
+        leave(element).then(() => {
+          console.log("Element faded out");
+        });
       }, 3000); // 3 seconds
     } else {
-      console.log("no element");
+      console.log("No element to fade out");
     }
   }
 }

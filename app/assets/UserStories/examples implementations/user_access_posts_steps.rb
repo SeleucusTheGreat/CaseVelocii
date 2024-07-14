@@ -29,8 +29,13 @@ Given("the following user exists:") do |table|
   
   Given("the following posts exist for the user {string}:") do |email, table|
     user = User.find_by(email: email)
-    post_attributes = table.rows_hash
-    @post = Post.create!(post_attributes.merge(user: user))
+    attr=table.rows_hash
+    post_attributes = attr.dup
+    address = post_attributes.delete(:address) 
+    post_attributes.merge!(user: user)
+    @post = Post.create!(post_attributes)
+    location = Location.new(address: address) 
+    @post.location = location
   end
   
   When("I visit the posts page") do

@@ -1,31 +1,31 @@
-    <%if notice %>
-        <div class="alert alert-warning text-center hidden" 
-        data-controller="alert"  data-alert-target="notice" 
-        data-transition-enter="transition ease-out duration-100"
-        data-transition-enter-start="transform opacity-0 scale-95"
-        data-transition-enter-end="transform opacity-100 scale-100"
-        data-transition-leave="transition ease-in duration-75"
-        data-transition-leave-start="transform opacity-100 scale-100"
-        data-transition-leave-end="transform opacity-0 scale-95"
-        role="alert">
-            <p class="notice"><%= notice %></p> 
-        </div>
-    <%end%>
-    <%if alert %>
-        <div class="alert alert-warning text-center hidden" 
-        data-controller="alert" 
-        data-alert-target="alert" 
-        data-transition-enter="transition ease-out duration-100"
-        data-transition-enter-start="transform opacity-0 scale-95"
-        data-transition-enter-end="transform opacity-100 scale-100"
-        data-transition-leave="transition ease-in duration-75"
-        data-transition-leave-start="transform opacity-100 scale-100"
-        data-transition-leave-end="transform opacity-0 scale-95"
-        role="alert">
-            <p class="alert"><%= alert %></p>
-        </div>
-    <%end%>
+<% if notice %>
+  <div class="alert alert-warning text-center"
+       data-controller="alert"
+       data-alert-target="notice"
+       data-transition-enter="transition ease-out duration-100"
+       data-transition-enter-start="transform opacity-0 scale-95"
+       data-transition-enter-end="transform opacity-100 scale-100"
+       data-transition-leave="transition ease-in duration-75"
+       data-transition-leave-start="transform opacity-100 scale-100"
+       data-transition-leave-end="transform opacity-0 scale-95"
+       role="alert">
+    <p class="notice"><%= notice %></p>
+  </div>
+<% end %>
 
-
+<% if alert %>
+  <div class="alert alert-warning text-center"
+       data-controller="alert"
+       data-alert-target="alert"
+       data-transition-enter="transition ease-out duration-100"
+       data-transition-enter-start="transform opacity-0 scale-95"
+       data-transition-enter-end="transform opacity-100 scale-100"
+       data-transition-leave="transition ease-in duration-75"
+       data-transition-leave-start="transform opacity-100 scale-100"
+       data-transition-leave-end="transform opacity-0 scale-95"
+       role="alert">
+    <p class="alert"><%= alert %></p>
+  </div>
+<% end %>
 
     

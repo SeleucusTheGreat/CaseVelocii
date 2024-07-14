@@ -17,7 +17,7 @@ class ChatsController < ApplicationController
     private
   
     def authorize_chat
-      unless @chat.user1 == current_user || @chat.user2 == current_user
+      unless @chat.buyer == current_user || @chat.owner == current_user
         redirect_to root_path, alert: 'You do not have permission to view this chat.'
       end
     end

@@ -7,7 +7,5 @@ class CreateLocations < ActiveRecord::Migration[7.1]
       t.references :post, foreign_key: true, null:false
       t.timestamps
     end
-    add_index :locations, :latitude
-    add_index :locations, :Longitude
   end
 end

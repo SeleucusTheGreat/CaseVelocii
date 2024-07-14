@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   def create
     if params[:chat_id] == 'new'
-      @chat =  Chat.find_or_create_by(post: @post, user1: current_user, user2: @post.user)
+      @chat =  Chat.find_or_create_by(post: @post, buyer: current_user, owner: @post.user)
     else
       @chat =  Chat.find(params[:chat_id])
     end

@@ -8,14 +8,14 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :posts
 
-  has_many :chats_as_user1, class_name: 'Chat', foreign_key: 'user1_id'
-  has_many :chats_as_user2, class_name: 'Chat', foreign_key: 'user2_id'
+  has_many :chats_as_buyer, class_name: 'Chat', foreign_key: 'buyer_id'
+  has_many :chats_as_owner, class_name: 'Chat', foreign_key: 'owner_id'
   has_many :messages, foreign_key: 'sender_id'
   has_many :received_notifications, class_name: 'Notification', foreign_key: 'recipient_id'
   has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id'
   
   def chats
-    Chat.where('user1_id = :user_id OR user2_id = :user_id', user_id: id)
+    Chat.where('buyer_id = :user_id OR owner_id = :user_id', user_id: id)
   end
 
 
