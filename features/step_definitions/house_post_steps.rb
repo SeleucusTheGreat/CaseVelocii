@@ -1,11 +1,10 @@
-# features/step_definitions/house_post_steps.rb
 
-  Given("I am on the CaseVelocii homepage") do
+  Given('I am on the CaseVelocii homepage') do
     visit root_path
   end
-  
-  Given("I am logged in") do
-    user = User.create(email: "user@example.com", password: "password", password_confirmation: "password")
+
+  Given('I am logged in') do
+    @user = User.create(email: "user@example.com", full_name: "user", password: "password", password_confirmation: "password")
     
     find('.profile-container').click 
     within('.dropdown-menu.session-manager') do
@@ -21,9 +20,9 @@
     end
 
     expect(page).to have_content("Logged in successfully")
-
+      
   end
-  
+
   When("I click on the user icon") do 
     find(".profile-container").click
   end

@@ -1,3 +1,5 @@
+
+
 Feature: A registered User Creates a new post regarding one of his houses
 
   As a logged-in user, I want to create a new post about my house so that other interested users can see it.
