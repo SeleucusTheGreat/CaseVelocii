@@ -25,4 +25,13 @@ class Location < ApplicationRecord
       end
     end
   end
+
+  private 
+    def self.within_radius?(search_address, radius, location)
+      search_coordinates = Geocoder.coordinates(search_address)
+      location_coordinates = Geocoder.coordinates(location.address)
+      distance = Geocoder::Calculations.distance_between(search_coordinates, location_coordinates)
+      distance <= radius
+    end
+ 
 end
