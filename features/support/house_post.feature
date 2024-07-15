@@ -14,7 +14,7 @@ Feature: A registered User Creates a new post regarding one of his houses
     Then I should be able to fill out the form
     And I enter all the information required
     And I upload one or more pictures
-    And I click on "Create"
+    And I click on Create
     Then I should see a confirmation message that the post has been successfully created
     When I visit My Houses again
     And I should see the House post I’ve just created

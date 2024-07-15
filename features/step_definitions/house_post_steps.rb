@@ -60,8 +60,8 @@
     attach_file("post[photos][]", Rails.root + "app/assets/images/appartment1.png")
   end
   
-  When("I click on {string}") do |button|
-    click_button button
+  When("I click on Create") do 
+    click_button "Create"
   end
   
   Then("I should see a confirmation message that the post has been successfully created") do
