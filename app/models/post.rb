@@ -3,6 +3,7 @@ class Post < ApplicationRecord
     belongs_to :user
     has_one :location, dependent: :destroy
     has_many :chat, dependent: :destroy
+    has_many :message, dependent: :destroy
     accepts_nested_attributes_for :location
     validate :validate_photos_count
     
