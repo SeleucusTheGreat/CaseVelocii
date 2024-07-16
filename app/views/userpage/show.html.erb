@@ -7,10 +7,10 @@
           <div class="col-md-4 text-center">
             <h5 class="">Profile picture:</h5>
             <% if @user.avatar.attached?  %>
-              <%= image_tag @user.avatar, class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
+              <%= image_tag @user.avatar, class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; border: 2px solid #007bff;" %>
             <%else%>
-              <% if current_user && current_user.provider == "google_oauth2" %>
-                <%= image_tag(current_user.avatar_url, class: "profile-picture  card-img-top" , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " ) %>
+              <% if @user && @user.provider == "google_oauth2" %>
+                <%= image_tag(@user.avatar_url, class: "profile-picture" , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover;  border: 2px solid #007bff;" ) %>
               <% else %>
                 <%= image_tag "logo.png", class: 'profile-avatar' , style: "width: 150px;  height: 150px; border-radius: 50%; object-fit: cover; " %>
               <%end%>
@@ -56,9 +56,13 @@
                   <div class="col-md-3 text-center User">
                     <% other_user = chat.other_user(@user) %>
                     <% if other_user.avatar.attached? %>
-                      <%= image_tag other_user.avatar, class: 'rounded-circle mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
+                      <%= image_tag other_user.avatar, class: 'rounded-circle mb-2', style: "width: 60px; height: 60px; object-fit: cover; border: 2px solid #007bff;" %>
                     <% else %>
-                      <%= image_tag "logo.png", class: 'rounded-circle mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
+                      <% if  other_user.provider == "google_oauth2" %>
+                          <%= image_tag(other_user.avatar_url, class: "rounded-circle mb-2",  style: "width: 60px; height: 60px; object-fit: cover; border: 2px solid #007bff;") %>
+                      <% else %>
+                        <%= image_tag "logo.png", class: 'rounded-circle mb-2', style: "width: 60px; height: 60px; object-fit: cover;" %>
+                      <%end%>
                     <% end %>
                     <h6 class="mb-0"><%= other_user.full_name %></h6>
                   </div>
