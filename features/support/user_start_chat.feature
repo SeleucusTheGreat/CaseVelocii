@@ -14,7 +14,7 @@ Scenario: User starts a new chat from a house post
 	Then I write a new message
 	And  I click on Send Message
 	Then A new chat should be created between me and the House owner
-	When I visit my User Page
+	When I visit my UserPage
 	Then A new chat should be visible
 	And it should display the other user's profile picture and name
 	And it should show the associated post's image and title

@@ -45,7 +45,7 @@
     expect(@chat.buyer).to eq(@user)
   end
   
-  When('I visit my User Page') do
+  When('I visit my UserPage') do
     visit userpage_path
   end
   
